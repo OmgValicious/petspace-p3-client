@@ -43,12 +43,6 @@ export default function Navbar({ currentUser, handleLogout }) {
 							</li>
 
 							<li>
-								<Link to="/posts/new" className='nav-link'>
-									Create a Post
-								</Link>
-							</li>
-
-							<li>
 								<Link to="/search" className='nav-link'>
 									Search	
 								</Link>
