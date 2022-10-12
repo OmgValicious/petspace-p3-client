@@ -119,7 +119,7 @@ const renderPosts = posts.map((post, idx) => {
                         </div>
                             
 
-                        <div className="card-footer row p-0 m-0">
+                        <div className="card-footer row p-0 m-0 cardCaptionNComments">
                             <div className='col d-flex align-items-center justify-content-between'>
                                 <div className='d-flex p-0'>
                                     {/* <i class="fa-regular fa-heart fs-3 me-2"></i> */}

@@ -95,8 +95,8 @@ nav {
 
 /* Post Page (singular) */
 .postCard {
-  max-width: 800px;
-  max-height: 900px;
+  width: 800px;
+  height: auto;
   border: #262525;
 }
 .postCardTitle {
@@ -145,7 +145,7 @@ nav {
 
 .cardSubComment {
   display: flex;
-  max-height: 100px;
+  height: 100px;
   align-items: flex-start;
   padding-top: -20px;
   overflow: hidden;
@@ -167,7 +167,7 @@ nav {
 }
 
 .cardPostBody {
-  max-height: 30px;
+  height: 30px;
 }
 
 .postCardHeader {
