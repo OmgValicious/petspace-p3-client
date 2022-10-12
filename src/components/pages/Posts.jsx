@@ -94,7 +94,7 @@ const handleLikes = async (postid) => {
 
 const renderPosts = posts.map((post, idx) => {
     return (
-       <div className="container " key={post._id}>
+       <div className="container" key={post._id}>
         <div className="row justify-content-center">
             <div className="col-sm-8 p-0">
                     <div className="card my-2" key={`key-${idx}`}>
