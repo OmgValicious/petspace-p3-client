@@ -12,7 +12,7 @@ export default function Search() {
             try{
                 const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api-v1/users`)
                 setResults(response.data)
-                console.log(results)
+                // console.log(results)
 
             }catch(err){
                 setErrorMessage(err.message)
@@ -30,7 +30,6 @@ export default function Search() {
 
     const filteredUsers = results.filter(result => {
         return result.username.toLowerCase().includes(search.toLowerCase())
-    
     })
  
     const handleClear = () => {

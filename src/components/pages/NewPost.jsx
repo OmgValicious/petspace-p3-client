@@ -94,7 +94,7 @@ export default function NewPost({ currentUser, setCurrentUser }) {
 
     return (
         <div>
-            <h1>New Post</h1>
+            <h1 className="postTitlePage my-3">New Post</h1>
             <div className='d-flex justify-content-center'>
                 <div className='card' style={{ width: '50rem' }}>
                     {previewSource? 
@@ -130,7 +130,7 @@ export default function NewPost({ currentUser, setCurrentUser }) {
 
 
                             <label htmlFor="content">Caption: </label>
-                            <textarea className='card-text'
+                            <textarea className='card-text inputBarPosts border m-0 p-2'
                                 type="text"
                                 name="content"
                                 id="content"

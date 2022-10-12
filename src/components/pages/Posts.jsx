@@ -134,8 +134,8 @@ const renderPosts = posts.map((post, idx) => {
                                 </div>
                             </div>
                             <div className='d-flex justify-content-start align-items-center'>
-                                <h4 className='fw-bold me-2 postTitleNCont'>{post.user.username}</h4>
-                                <h4 className='postTitleNCont'>{post.content}</h4>
+                                <h4 className='fw-bold ms-0 mt-3'>{post.user.username}</h4>
+                                <h4 className='ms-2 mt-3'>{post.content}</h4>
                             </div>
 
                             <div className='d-flex justify-content-start mt-2 border-bottom p-2'>
@@ -148,7 +148,7 @@ const renderPosts = posts.map((post, idx) => {
                                             <label className='form-label' htmlFor="comment"><i className="bi bi-emoji-smile"></i> {currentUser.username}</label>
                                         </div>
                                         <div className='row d-flex justify-content-start m-0 p-1'>
-                                            <input type="text" className='col-9 d-flex inputBarPosts border justify-content-start' placeholder='add comment...' value={comment} onChange={(e) => setComment(e.target.value)} id="comment"/>
+                                            <input type="text" className='col-10 d-flex inputBarPosts border justify-content-start' placeholder='add comment...' value={comment} onChange={(e) => setComment(e.target.value)} id="comment"/>
                                             <button type="submit" className='col-sm-2 d-flex p-0 m-1 justify-content-center align-items-center subBtnPosts' style = {{backgroundColor: '#FC6767', width: '80px' }}>Submit</button>
                                         </div>
                                         
@@ -177,7 +177,7 @@ const renderPosts = posts.map((post, idx) => {
     return(
         <div>
         
-            <h1>Posts</h1>
+            {/* <h1 className="postTitlePage my-3">Posts</h1> */}
             {renderPosts}
             {/* {imageIds && imageIds.map((imageId, idx) => (
                 <Image
