@@ -18,6 +18,7 @@ https://beautiful-otter-058b32.netlify.app
 - REACT
 - MongoDB
 - Mongoose
+- cloudinary
 - bcrypto
 - jwt
 
