@@ -6,9 +6,9 @@ export default function EditComment() {
     const [form, setForm] = useState({
         content: ''
     })
-    const [errorMessage, setErrorMessage] = useState('')
+    const [msg, setMsg] = useState('')
 
-    const {postid, commentid} = useParams()
+    const { postid, commentid } = useParams()
     const navigate = useNavigate()
 
     useEffect(() => {
@@ -16,10 +16,10 @@ export default function EditComment() {
             try {
                 const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api-v1/posts/${postid}/comments/${commentid}`)
                 setForm(response.data)
-            } catch(err) {
+            } catch (err) {
                 console.warn(err)
                 if (err.response) {
-                    setErrorMessage(err.response.data.message)
+                    setMsg(err.response.data.msg)
                 }
             }
         }
@@ -27,30 +27,29 @@ export default function EditComment() {
     }, [postid, commentid])
 
     const handleSubmit = async e => {
-        try{
+        try {
             e.preventDefault()
             // axios.put/.post('url', data for the req body)
             const response = await axios.put(`${process.env.REACT_APP_SERVER_URL}/api-v1/posts/${postid}/comments/${commentid}`, form)
-            // navigate back to the details page for this bounty
             setForm(response.data)
             navigate(`/posts/${postid}`)
-        } catch(err) {
+        } catch (err) {
             console.warn(err)
             if (err.response) {
-                setErrorMessage(err.response.data.message)
+                setMsg(err.response.data.msg)
             }
         }
     }
 
-    return(
+    return (
         <div>
             <h1>Edit Comment:</h1>
-            <p>{errorMessage}</p>
-            
+            <p>{msg}</p>
+
             <form onSubmit={handleSubmit}>
                 <div>
                     <label htmlFor='content'>Comment:</label>
-                    <input 
+                    <input
                         type='text'
                         id='content'
                         value={form.content}
@@ -58,12 +57,12 @@ export default function EditComment() {
                     />
                 </div>
 
-                <button type='submit' style = {{backgroundColor: '#FC6767', width: '150px' }}>Submit</button>
-            <Link to={`/posts/${postid}`}>
-                <button style = {{backgroundColor: '#FC6767', width: '150px' }}>Cancel</button>
-            </Link>
+                <button type='submit' style={{ backgroundColor: '#FC6767', width: '150px' }}>Submit</button>
+                <Link to={`/posts/${postid}`}>
+                    <button style={{ backgroundColor: '#FC6767', width: '150px' }}>Cancel</button>
+                </Link>
             </form>
-            
+
         </div>
     )
 }

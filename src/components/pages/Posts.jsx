@@ -1,18 +1,15 @@
 import { useState, useEffect } from "react"
 import axios from "axios"
-import { dblClick } from "@testing-library/user-event/dist/click"
 import Moment from 'react-moment';
 import { Link } from 'react-router-dom'
 
-import {Image} from 'cloudinary-react'
-export default function Posts({ currentUser, setCurrentUser }){
+
+export default function Posts({ currentUser }){
 	
     const [posts, setPosts] = useState([])
-    const [errorMessage, setErrorMessage] = useState("")
-    const [content, setContent] = useState("")
+    const [msg, setMsg] = useState("")
     const [comment, setComment] = useState("")
-    const [commentNum, setCommentNum] = useState({})
-    const [imageIds, setImagesIds] = useState()
+    const [commentNum, setCommentNum] = useState({})   
     const [like, setLike] = useState({})
     const [likeNum, setLikeNum] = useState({})
    
@@ -39,24 +36,16 @@ export default function Posts({ currentUser, setCurrentUser }){
                 })
                 
             }catch(err){
-                setErrorMessage(err.message)
-
+                console.warn(err)
+                if(err.response) {
+                    setMsg(err.response.data.msg)
+                }
             }
         }
         getPosts()
 },[currentUser, likeNum])
 
 
-const loadImages = async() => {
-    try{
-        const res =await fetch(`${process.env.REACT_APP_SERVER_URL}/api-v1/posts/api/images`)
-        const data = await res.json()
-        setImagesIds(data)
-        console.log('IMG ID - > ', data)
-    }catch(err){
-        console.log(err)
-    }
-}
 const handleComment = async (e, post_id) => {
     e.preventDefault()
     try{
@@ -65,13 +54,13 @@ const handleComment = async (e, post_id) => {
         commentNum[post_id] = commentNum[post_id] + 1
         setCommentNum(commentNum)
     }catch(err){
-        setErrorMessage(err.message)
+        console.warn(err)
+        if(err.response) {
+            setMsg(err.response.data.msg)
+        }
     }
 }
-// const findUserById = (id) => {
-//     const user = db.users.find({'_id': id})
-//     return user.username
-// }
+
 const handleLikes = async (postid) => {
     try{
         if (like[postid]) {
@@ -88,7 +77,10 @@ const handleLikes = async (postid) => {
         }
         
     }catch(err){
-        setErrorMessage(err.message)
+        console.warn(err)
+        if(err.response) {
+            setMsg(err.response.data.msg)
+        }
     }
 }
 
@@ -101,7 +93,6 @@ const renderPosts = posts.map((post, idx) => {
                         <div className="card-header d-flex align-items-center justify-content-between">
                             <div className='col d-flex align-items-center justify-content-between'>
                                 <div className="d-flex">
-                                    {/* profile pic */}
                                     <h6 className='mb-0 fw-bold'>{post.user.username}</h6>
                                 </div>
                                 <div className="d-flex justify-content-end">
@@ -122,11 +113,7 @@ const renderPosts = posts.map((post, idx) => {
                         <div className="card-footer row p-0 m-0">
                             <div className='col d-flex align-items-center justify-content-between'>
                                 <div className='d-flex p-0'>
-                                    {/* <i class="fa-regular fa-heart fs-3 me-2"></i> */}
-                                    
-                                    {/* {like[post._id]? <button><i className="fa-regular fa-heart fs-3 me-2" style = {{backgroundColor: '#FC6767'}}></i></button> : <button><i className="fa-regular fa-heart fs-3 me-2" style = {{backgroundColor: 'white'}}></i></button>} */}
                                     {like[post._id]? <button className='postsLikeBtn' onClick={() => handleLikes(post._id)}>❤️</button> : <button className='postsLikeBtn' onClick={() => handleLikes(post._id)}>🤍</button>}
-                                    {/* <i class="fa-regular fa-comment fs-3"></i> */}
                                     <p className="ms-2 mt-3">{likeNum[post._id]} likes</p>
                                 </div>
                                 <div>
@@ -159,35 +146,15 @@ const renderPosts = posts.map((post, idx) => {
                     </div>
                 </div>
             </div>
-            {/* <div className="col-sm-4"></div> */}
-        </div>
+            </div>
 
-        //     <Moment fromNow>{post.createdAt}</Moment>
-        //     {/* need to map an array of comments and hide it on Posts route */}
-        //     {/* <p>{post.comment}</p> */}
-        //     {/* changed this to '.length' to show number of likes */}
-            
-            
-        //     {/* <p>{findUserById(post.user)}</p> */}
-            
-        // </div>
     )
 
 })
     return(
-        <div>
-        
-            {/* <h1 className="postTitlePage my-3">Posts</h1> */}
-            {renderPosts}
-            {/* {imageIds && imageIds.map((imageId, idx) => (
-                <Image
-                    key = {idx}
-                    cloudName ="sdfie0"
-                    publicId = {imageId}
-                    width = '300'
-                    crop = 'scale'
-                />
-            ))} */}
+        <div>        
+            {msg}
+            {renderPosts} 
         </div>
     )
 }

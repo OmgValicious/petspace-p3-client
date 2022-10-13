@@ -1,12 +1,12 @@
-import { useEffect, useState} from "react"
+import { useEffect, useState } from "react"
 import { useParams, Link, useNavigate } from "react-router-dom"
 import axios from "axios"
 
 export default function EditPost() {
     const [form, setForm] = useState('')
-    const [errorMessage, setErrorMessage] = useState('')
+    const [msg, setMsg] = useState('')
 
-    const {postid} = useParams()
+    const { postid } = useParams()
     const navigate = useNavigate()
 
     useEffect(() => {
@@ -14,10 +14,10 @@ export default function EditPost() {
             try {
                 const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api-v1/posts/${postid}`)
                 setForm(response.data.content)
-            } catch(err) {
+            } catch (err) {
                 console.warn(err)
                 if (err.response) {
-                    setErrorMessage(err.response.data.message)
+                    setMsg(err.response.data.msg)
                 }
             }
         }
@@ -25,30 +25,29 @@ export default function EditPost() {
     }, [])
 
     const handleSubmit = async e => {
-        try{
+        try {
             e.preventDefault()
             // axios.put/.post('url', data for the req body)
-            const response = await axios.put(`${process.env.REACT_APP_SERVER_URL}/api-v1/posts/${postid}`, {content: form})
-            // navigate back to the details page for this bounty
+            const response = await axios.put(`${process.env.REACT_APP_SERVER_URL}/api-v1/posts/${postid}`, { content: form })
             setForm(response.data.content)
             navigate(`/posts/${postid}`)
 
-        } catch(err) {
+        } catch (err) {
             console.warn(err)
             if (err.response) {
-                setErrorMessage(err.response.data.message)
+                setMsg(err.response.data.msg)
             }
         }
     }
 
-    return(
+    return (
         <div>
             <h1>Edit Post Caption:</h1>
-            <p>{errorMessage}</p>
-            
+            <p>{msg}</p>
+
             <form onSubmit={handleSubmit}>
                 <div>
-                     <textarea
+                    <textarea className='card-text inputBarPosts border m-0 p-2'
                         name='content'
                         type='text'
                         id='content'
@@ -58,12 +57,12 @@ export default function EditPost() {
                     ></textarea>
                 </div>
 
-                <button type='submit' style = {{backgroundColor: '#FC6767', width: '150px' }}>Submit</button>
-            <Link to={`/posts/${postid}`}>
-                <button style = {{backgroundColor: '#FC6767', width: '150px' }}>Cancel</button>
-            </Link>
+                <button type='submit' style={{ backgroundColor: '#FC6767', width: '150px' }}>Submit</button>
+                <Link to={`/posts/${postid}`}>
+                    <button style={{ backgroundColor: '#FC6767', width: '150px' }}>Cancel</button>
+                </Link>
             </form>
-            
+
         </div>
     )
 }

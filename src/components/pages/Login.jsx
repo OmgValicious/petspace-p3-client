@@ -15,7 +15,7 @@ export default function Login({ currentUser, setCurrentUser }) {
 		try {
 			// post fortm data to the backend
 			const reqBody = {
-				email, 
+				email,
 				password
 			}
 			const response = await axios.post(`${process.env.REACT_APP_SERVER_URL}/api-v1/users/login`, reqBody)
@@ -29,15 +29,15 @@ export default function Login({ currentUser, setCurrentUser }) {
 
 			// set the user in App's state to be the decoded token
 			setCurrentUser(decoded)
-			
+
 
 		} catch (err) {
 			console.warn(err)
-			if (err.response) {	
+			if (err.response) {
 				setMsg(err.response.data.msg)
 			}
 		}
- 	}
+	}
 
 	// conditionally render a navigate component
 	if (currentUser) {
@@ -51,17 +51,17 @@ export default function Login({ currentUser, setCurrentUser }) {
 					<div className='col-md-5'>
 						<div className='form-box shadow bg-white p-4 rounded'>
 							<div className='mb-3 border-bottom border-3 border-dark'>
-								<img src={require('../../assets/petspaceBlk.png')} className='formLg mb-2'/>
+								<img src={require('../../assets/petspaceBlk.png')} className='formLg mb-2' />
 							</div>
 
-							<div>	
+							<div>
 								<p className='mb-4 text-center fs-6 formTitle'>Login to Your Account</p>
-											<p>{msg}</p>
+								<p>{msg}</p>
 							</div>
 							<form className='mb-3' onSubmit={handleSubmit}>
 								<div className='form-floating mb-3'>
-									<input 
-									className="form-control form-control-sm rounded "
+									<input
+										className="form-control form-control-sm rounded "
 										type="email"
 										id="floatingInput"
 										placeholder='your email...'
@@ -71,10 +71,10 @@ export default function Login({ currentUser, setCurrentUser }) {
 									/>
 									<label htmlFor='floatingInput'>Email:</label>
 								</div>
-								
+
 								<div className='form-floating mb-3'>
-									<input 
-									className="form-control form-control-sm rounded"
+									<input
+										className="form-control form-control-sm rounded"
 										type="password"
 										id="floatingPassword"
 										placeholder='password...'
@@ -90,13 +90,13 @@ export default function Login({ currentUser, setCurrentUser }) {
 							</form>
 							<div className='sign-up-accounts d-flex justify-content-center'>
 								<p>Don't have an account? <Link to='/register'> Sign up</Link></p>
-								
+
 							</div>
 						</div>
-					</div>	
+					</div>
 				</div>
 			</div>
 		</div>
-		
+
 	)
 }

@@ -9,7 +9,7 @@ export default function Register({ currentUser, setCurrentUser }) {
 	const [email, setEmail] = useState('')
 	const [password, setPassword] = useState('')
 	const [msg, setMsg] = useState('')
-	// const [formText, setFormText] = useState('No profile photo currently selected')
+	
 	    // Cloudinary 
 		const [fileInputState, setFileInputState] = useState('')
 	
@@ -23,18 +23,7 @@ export default function Register({ currentUser, setCurrentUser }) {
 			// previewFile(file);
 			setFormImg(file)
 		}
-	
-		// const handleFormText = (e) => {
-		// 	if( formImg != ""){
-		// 		setFormText('Profile photo uploaded successfully!')
-		// 	}else{
 		
-		// 	}
-		//   }		
-		// 	useEffect(() => {
-		// 		handleFormText()
-		// 	}, [formImg])
-	
 		
 
 	// submit event handler
